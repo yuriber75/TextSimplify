@@ -1,14 +1,12 @@
 package ie.atu.sw;
-
+/**
+ * Saves processed results to a file
+ * 
+ * This class is an abstraction to handle the saving of results,
+ * delegating the file-writing to the ResultSaverToFile class.
+ */
 public class ResultSaver {
 
-	/**
-	 * A utility class for saving processed results to a file.
-	 * 
-	 * This class is an abstraction to handle the saving of results,
-	 * delegating the file-writing to the ResultSaverToFile class.
-	 * It simplifies the interaction with file-saving mechanisms and promotes clean separation of concerns.
-	 */
     private final ResultSaverToFile fileSaver; 
 
     /**

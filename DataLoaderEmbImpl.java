@@ -27,8 +27,8 @@ public class DataLoaderEmbImpl extends DataLoaderBuffer<Map<String, double[]>> {
      * 
      * @param filePath The location of the file to load
      * @return a map where each key is a word and the values are vectors
-     * @throws Exception if an error occurs while processing the file
-     */	
+     * @throws RuntimeException if an error occurs while processing the file
+     */
 	@Override
 	public Map<String, double[]> load(String filePath) {               //Big O = O(n)
 		// is not quadratic because is not grow based on the number of line in quadratic

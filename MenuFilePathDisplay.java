@@ -1,11 +1,14 @@
 package ie.atu.sw;
-
+/**
+ * Displays messages regarding current path and successful or invalid update
+ *
+ */
 public class MenuFilePathDisplay {
 
     /**
-     * Displays the current file path and asks the user if they want to change it.
+     * Displays the current file path and asks the user if they want to change it
      *
-     * @param type The type of the file path to display.
+     * @param type The type of the file path to display
      */
     public void displayFilePathMenu(PathType type) {  //Big O = O(1) 
         System.out.println("");
@@ -16,23 +19,23 @@ public class MenuFilePathDisplay {
     }
 
     /**
-     * Displays the updated file path.
+     * Displays the updated file path
      *
-     * @param newPath The updated file path.
+     * @param newPath The updated file path
      */
     public void displaySuccessMessage(String newPath) {  //Big O = O(1) 
         System.out.println("Path updated successfully to: " + newPath);
     }
 
     /**
-     * Displays an error message for an invalid path.
+     * Displays an error message for an invalid path
      */
     public void displayErrorMessage() {  //Big O = O(1) 
         System.out.println("Invalid path. Please try again.");
     }
 
     /**
-     * Displays a message when the path remains unchanged.
+     * Displays a message when the path remains unchanged
      */
     public void displayUnchangedMessage() {  //Big O = O(1) 
         System.out.println("Path remains unchanged.");

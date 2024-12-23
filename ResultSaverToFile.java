@@ -13,7 +13,6 @@ public class ResultSaverToFile {
 	 * 
 	 * @param results    Result to be saved
 	 * @param outputPath Path for file
-	 * @throws IOException occurs if there is a writing error
 	 */
     public void saveResultsToOutputFile(String results, String outputPath) { // Big O = O(n)
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath))) {

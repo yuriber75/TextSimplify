@@ -11,19 +11,19 @@ public class SimilarityComparator implements Comparator<String> {
 
     private final double[] targetVector;
     private final SimilarityCalculator similarityCalculator;
-    private final Map<String, double[]> wordVectors; // 
+    private final Map<String, double[]> wordsEmbedding; 
 
     /**
      * Constructs:
      * 
      * @param targetVector           target vector to be compared
      * @param similarityCalculator   Similarity Calculator chosen between options
-     * @param wordVectors            Embedding Maps (key is "String", value is "Vectors")
+     * @param wordsEmbedding         Embedding Maps (key is "String", value is "Vectors")
      */
-    public SimilarityComparator(double[] targetVector, SimilarityCalculator similarityCalculator, Map<String, double[]> wordVectors) {
+    public SimilarityComparator(double[] targetVector, SimilarityCalculator similarityCalculator, Map<String, double[]> wordsEmbedding) {
         this.targetVector = targetVector;
         this.similarityCalculator = similarityCalculator;
-        this.wordVectors = wordVectors;
+        this.wordsEmbedding = wordsEmbedding;
     }
 
     /**
@@ -35,12 +35,12 @@ public class SimilarityComparator implements Comparator<String> {
      * @return Negative integer less similar, Positive more similar, zero same similarity 
      */  
     @Override
-    public int compare(String word1, String word2) { //Big O = O(1)
-        double[] vector1 = wordVectors.get(word1);   //Big O = O(1)
-        double[] vector2 = wordVectors.get(word2);   //Big O = O(1)
+    public int compare(String word1, String word2) {    //Big O = O(1)
+        double[] vector1 = wordsEmbedding.get(word1);   //Big O = O(1)
+        double[] vector2 = wordsEmbedding.get(word2);   //Big O = O(1)
 
         // if vector are missing then consider them equals
-        if (vector1 == null || vector2 == null) {    //Big O = O(1)
+        if (vector1 == null || vector2 == null) {       //Big O = O(1)
             return 0; 
         }
 

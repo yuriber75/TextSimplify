@@ -14,6 +14,6 @@ public abstract interface SimilarityCalculator {
      * @param vectorB second word vector
      * @return Distance between the vectors
 	 */
-	double calculateSimilarity(double[] vectorA, double[] vectorB); //Big O = depend from polyphormic specification
+	public double calculateSimilarity(double[] vectorA, double[] vectorB); //Big O = depend from specification
 
 }

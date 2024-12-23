@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
  *  Abstract base class for data loaders that utilise buffered reading.
  *  
  *  This class provides utility methods in order to reuse the method
+ *  
+ * @param <T> generic data type
  */
 public abstract class DataLoaderBuffer<T> implements DataLoader<T> {
 

@@ -1,7 +1,7 @@
 package ie.atu.sw;
 
 /**
- * Generic interface for loading data from a file.
+ * Generic interface for loading data from a file
  * Heavy lift is demanded to class that implement this interface
  *
  * @param <T> The type of data that will be loaded by the implementing class

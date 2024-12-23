@@ -26,7 +26,7 @@ public class DataLoaderGoogleImpl extends DataLoaderBuffer<Set<String>> {
      * 
      * @param filePath The location of the file to load
      * @return a set with the word find in the file
-     * @throws Exception if an error occurs while processing the file
+     * @throws RuntimeException if an error occurs while processing the file
      */	
     @Override
     public Set<String> load(String filePath) { // Big O = O(n)

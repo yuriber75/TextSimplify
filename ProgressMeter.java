@@ -1,11 +1,30 @@
 package ie.atu.sw;
 
+/**
+ * Provides a utility to display a progress meter in a terminal. 
+ * The progress meter works by displaying a dynamic progress bar
+ * that updates in place as progress is made.
+ * 
+ * Note:
+ * <ul>
+ * <li>The progress meter does <b>not</b> work in the Eclipse console, but will
+ * work in Windows (DOS), Mac, and Linux terminals.</li>
+ * <li>The progress meter uses the line feed character "\r" to return
+ * to the start of the current line. Outputting text (e.g., using 
+ * System.out.println(...) between calls to printProgress
+ * will disrupt the progress bar, causing subsequent updates to appear on
+ * a new line.</li>
+ * <li>If the progress bar width exceeds the terminal width, the meter may
+ * not display properly. The bar's size can be adjusted via the SIZE
+ * constant.</li>
+ * </ul>
+ */
 public class ProgressMeter {
 	
 	private static final int SIZE = 50;
     private static final char DONE_CHAR = '█'; // Change to whatever you like.
     private static final char TODO_CHAR = '░'; // Change to whatever you like.	
-	/*
+	/**
 	 *  Terminal Progress Meter
 	 *  -----------------------
 	 *  You might find the progress meter below useful. The progress effect 
@@ -25,12 +44,15 @@ public class ProgressMeter {
 	 *      
 	 *  3) If the variable size is greater than the terminal width, a new line
 	 *     escape character "\n" will be automatically added and the meter won't
-	 *     work properly.  
-	 *  
-	 * 
+	 *     work properly.
+	 *      
+	 *@param index word analysed
+	 *@param total number of words in the sentence
 	 */
 	public static void printProgress(int index, int total) { //static method will work with class without create a new object
 		if (index > total) return;	//Out of range
+		
+		System.out.print(ConsoleColour.BLUE_BOLD_BRIGHT);         //Big O = O(1)
 	    
 	    //Compute basic metrics for the meter
         int complete = (100 * index) / total;
@@ -59,6 +81,4 @@ public class ProgressMeter {
         //Once the meter reaches its max, move to a new line.
         if (DONE_CHAR == total) System.out.println("\n");
     }
-	
-	
 }

@@ -54,7 +54,7 @@ public class AnalysisPreProcessor {
 	        	similarityCalculator = new SimilarityCalculatorPearsonImpl();
 	            System.out.println("Pearson Distance selected.");	        	
 	        }
-	        default ->{
+	        default ->{  // this won't happen anyway because option outside 1/4 are not allowed
 	        	similarityCalculator = new SimilarityCalculatorCosineImpl();
 	            System.out.println("Invalid choice, defaulting to Cosine Similarity.");        	
 	        }

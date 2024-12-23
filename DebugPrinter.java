@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public class DebugPrinter {
 
-    private static final int WORD_COLUMN_WIDTH = 18;  
+    private static final int WORD_COLUMN_WIDTH = 22;  
     
     /**
      * Displays a message asking the user how many word vectors they want to print.
@@ -26,72 +26,50 @@ public class DebugPrinter {
     }
 
     /**
-     * Prints a specified number of lines from Set or Map
+     * Requests to specify number of lines to be printed
      * 
-     * @param <T> The type either a Set or a Map
-     * @param data either Set<String> or Map<String, double[]>
+     * @param size  Dimension of the Map or Set 
      * @param label The label for the data
-     * @param isMap check if it is a map
      */
-    private static <T> void printLines(T data, String label, boolean isMap) { // Big O = O(n)
-        int count = 0;
-        
-        int size;
-        if (isMap) {
-            Map<String, double[]> mapData = (Map<String, double[]>) data;//casting should be safe in this case...not optimal
-            size = mapData.size();
-        } else {
-            Set<String> setData = (Set<String>) data;//casting should be safe in this case...not optimal
-            size = setData.size();
-        }
-        
-        getLinesToPrint(size, label);
-        
+    private static int printLines(int size, String label) { // Big O = O(1)  
         System.out.print(ConsoleColour.BLACK_BOLD_BRIGHT);
         int lines = MenuProcessInput.processInput(size, new Scanner(System.in));
         System.out.println(ConsoleColour.GREEN);
         
         System.out.println("Debug: First " + lines + " " + label + " loaded:");
         
-        // Print either the words or word vectors
-        if (isMap) {
-            Map<String, double[]> wordVectors = (Map<String, double[]>) data;
-            for (Map.Entry<String, double[]> entry : wordVectors.entrySet()) { // Big O = O(n)
-                System.out.printf("%-" + WORD_COLUMN_WIDTH + "s", "Word: " + entry.getKey());
-                System.out.print(" Vector: [");
-
-                double[] vector = entry.getValue();
-                for (int i = 0; i < vector.length; i++) { // Big O = O(n)
-                    System.out.printf("%.4f", vector[i]);
-                    if (i < vector.length - 1) System.out.print(", ");
-                }
-                System.out.println("]");
-
-                count++;
-                if (count == lines) break;
-            }
-        } else {
-            Set<String> words = (Set<String>) data; //casting should be safe in this case...not optimal
-            for (String word : words) { // Big O = O(n)
-                System.out.printf("%-" + WORD_COLUMN_WIDTH + "s", "Word: " + word);
-                System.out.println();
-
-                count++;
-                if (count == lines) break;
-            }
-        }
-
-        System.out.println("");
+        return lines;
     }
 
     /**
-     * Prints word vectors from the provided map.
+     * Prints words and vectors from the provided map.
      * 
      * @param wordVectors the map containing word vectors
      * @param label the label for the word vectors
      */
     public static void printVectors(Map<String, double[]> wordVectors, String label) { // Big O = O(n)
-        printLines(wordVectors, label, true); // Use the generic method for printing maps
+        int count = 0;                                // initialise a counter
+        
+        int size = wordVectors.size();                // get total size
+        getLinesToPrint(size, label);                 // call a method to print
+        
+        int lines = printLines(size, label);          // get number of lines
+        
+        for (Map.Entry<String, double[]> key : wordVectors.entrySet()) { // Big O = O(n)
+            System.out.printf("%-" + WORD_COLUMN_WIDTH + "s", "Word: " + key.getKey());
+            System.out.print(" Vector: [");           // Print Word and Key tabulated [%-22s]
+
+            double[] vector = key.getValue();         // get vector array of double
+            for (int i = 0; i < vector.length; i++) { // Big O = O(n)- loop and print vectors
+                System.out.printf("%.4f", vector[i]); // formatted 4 decimal places
+                if (i < vector.length - 1) System.out.print(", ");
+            }
+            System.out.println("]");
+
+            count++;                                  // update counter
+            if (count == lines) break;                // stop loop
+        }
+        System.out.println("");
     }
 
     /**
@@ -101,6 +79,20 @@ public class DebugPrinter {
      * @param label the label for the words
      */
     public static void printWords(Set<String> words, String label) { // Big O = O(n)
-        printLines(words, label, false); // Use the generic method for printing sets
+        int count = 0;
+        
+        int size = words.size();
+        getLinesToPrint(size, label);
+        
+        int lines = printLines(size, label);
+        
+        for (String word : words) { // Big O = O(n)
+            System.out.printf("%-" + WORD_COLUMN_WIDTH + "s", "Word: " + word);
+            System.out.println();
+
+            count++;
+            if (count == lines) break;
+        }
+        System.out.println("");
     }
 }

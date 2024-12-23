@@ -39,7 +39,7 @@ public class AnalysisExecutor {
      * This includes:
      * <ul>
      *   <li>dataLoaderService		   -> Loading word-embeddings, Google-1000, input text.</li>
-     *   <li>degugging(verify loading) -> Print part or all loading data from Map or List</li>  
+     *   <li>debugging(verify loading) -> Print part or all loading data from Map or List</li>  
      *   <li>textProcessorService	   -> Processing the text</li>
      *   <li>stringConcatenation	   -> Converting the processed text to a single string.</li>
      * </ul>
@@ -58,15 +58,20 @@ public class AnalysisExecutor {
 	        Map<String, double[]> wordEmbeddings = dataLoaderService.loadWordEmbeddings(FilePathUtils.getFilePath(PathType.EMBEDDING));//Big O = O(n)
 	        Set<String> googleWords  = dataLoaderService.loadGoogleWords(FilePathUtils.getFilePath(PathType.GOOGLE));                  //Big O = O(n)
 	        List<String> textWords = dataLoaderService.loadText(FilePathUtils.getFilePath(PathType.TEXT));                             //Big O = O(n)
-	
-	        // Debugging purpose
-			System.out.println(ConsoleColour.GREEN);              //Big O = O(1) 
-	        debugLogger.log("Debug start: ");                     //Big O = O(1)
-	        debugLogger.printWordEmbeddings(wordEmbeddings);      //Big O = O(n)
-	        debugLogger.printGoogleWords(googleWords);            //Big O = O(n)
-	        debugLogger.printTextContent(textWords);              //Big O = O(n)
-			System.out.print(ConsoleColour.BLUE_BOLD_BRIGHT);     //Big O = O(1)
-	
+
+	        Scanner scanner = new Scanner(System.in);
+	        var debugMenuProcessor = new DebugMenuProcessor();
+	        boolean debugRequested = debugMenuProcessor.processDebugRequested(scanner);
+	        
+	        if (debugRequested) {
+		        // Debugging purpose
+				System.out.println(ConsoleColour.GREEN);              //Big O = O(1) 
+		        debugLogger.log("Debug start: ");                     //Big O = O(1)
+		        debugLogger.printWordEmbeddings(wordEmbeddings);      //Big O = O(n)
+		        debugLogger.printGoogleWords(googleWords);            //Big O = O(n)
+		        debugLogger.printTextContent(textWords);              //Big O = O(n)
+	        }
+			
             ParagraphProcessor paragraphProcessor = new ParagraphProcessor(googleWords, wordEmbeddings, similarityCalculator); //Big O = O(1)
             List<String> processedText = paragraphProcessor.process(textWords);                                                //Big O = O(n log n)
             

@@ -3,13 +3,13 @@ package ie.atu.sw;
 import java.util.*;
 
 /**
- * @author  Yuri Bertozzi G00439350@atu.ie 
- * @version 1.0
- * @since   1.9 
- *
  * Simplifying Text with Word Embeddings 
  * is a text simplifier API and application UI in Java that converts
  * the words in a text file to the 1,000 most common words in English.
+ * 
+ * @author  Yuri Bertozzi G00439350@atu.ie 
+ * @version 1.0
+ * @since   1.9 
  */
 public class Runner {
     
